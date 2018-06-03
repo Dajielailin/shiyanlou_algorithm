@@ -1,9 +1,11 @@
 #!/bin/bash
 i=1
-while [ $i -le $1 ]
+echo -n "Please input the lines of triangle: "
+read l
+while [ $i -le $l ]
 do
 	j=0
-	while [ $j -lt $(($1-i)) ]
+	while [ $j -lt $(($l-i)) ]
 	do
 		echo -n " "
 		j=$((j+1))	
@@ -15,7 +17,7 @@ do
 		j=$((j+1))
 	done
 	j=0
-	while [ $j -lt $(($1-i)) ]
+	while [ $j -lt $(($l-i)) ]
 	do
 		echo -n " "
 		j=$((j+1))
