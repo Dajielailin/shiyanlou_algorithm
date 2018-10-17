@@ -11,13 +11,13 @@ string reverseWords(string& inStr)
 		string tmp;
 		int start, end;
 		start = end = inStr.size() - 1;
-		for(size_t rindex = end; rindex >= 0; rindex--)
+		for(int rindex = end; rindex >= 0; rindex--)
 		{
 			if(inStr[rindex] != ' ')
 			{
 				start--;
 			}
-			esle
+			else
 			{
 				if(start != end)
 				{
@@ -42,7 +42,7 @@ string reverseWords(string& inStr)
 int main()
 {
 	string input, output;
-	cin >> input;
+	getline(cin, input);
 	output = reverseWords(input);
 	cout << output;
 	return 0;
