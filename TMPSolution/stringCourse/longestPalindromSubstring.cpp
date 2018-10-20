@@ -4,7 +4,7 @@
 
 using namespace std;
 
-string longestPalinSubstr(string & tt, vector<char> & pp, string & input)
+string longestPalinSubstr(string & tt, vector<int> & pp, string & input)
 {
 	string res;
 	if(input.empty())
@@ -21,12 +21,13 @@ string longestPalinSubstr(string & tt, vector<char> & pp, string & input)
 			pp[i] = pp[ii];
 		else
 		{
-			left = center - pp[ii];
-			right ++;
+			left = 2 * i - right - 1;
+			right++;
 			while(left >= 0 && right < tt.size() && tt[left] == tt[right])
 				left--, right++;
-			center = i, left++, right--;
-			pp[i] = right - center;
+			left++, right--;
+			pp[i] = right - i;
+			center = i;
 		}
 	}
 	int index = 1, max = 1;
@@ -38,7 +39,7 @@ string longestPalinSubstr(string & tt, vector<char> & pp, string & input)
 			max = pp[i];
 		}
 	}
-	res = index > 1 ? input.substr(index/2-1, max) : input.substr(0, 1);
+	res = index > 1 ? input.substr(index/2 - max/2, max) : input.substr(0, 1);
 	return res;
 }
 
@@ -46,7 +47,7 @@ int main()
 {
 	string input, tmpIn;
 	getline(cin, input);
-	vector<char> palinLen(2*input.size()+1, 0);
+	vector<int> palinLen(2*input.size()+1, 0);
 	for(int i =0 ; i < input.size(); i++)
 	{
 		tmpIn.push_back('#');
