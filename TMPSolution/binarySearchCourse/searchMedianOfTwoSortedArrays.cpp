@@ -38,10 +38,14 @@ float findMedianOfTwoArrays(vector<int> & va, vector<int> & vb)
 		vv = vb;
 	if(vb.empty())
 		vv = va;
-	if(vv.size() % 2 == 0)
-		return (vv[vv.size() / 2 - 1] + vv[vv.size() / 2]) / 2.0;
-	else
-		return vv[vv.size() / 2];
+	if(!vv.empty())
+	{
+		
+		if(vv.size() % 2 == 0)
+			return (vv[vv.size() / 2 - 1] + vv[vv.size() / 2]) / 2.0;
+		else
+			return vv[vv.size() / 2];
+	}
 	int lenA = va.size(), lenB = vb.size();
 	int len = lenA + lenB;
 	if(len % 2 == 0)
