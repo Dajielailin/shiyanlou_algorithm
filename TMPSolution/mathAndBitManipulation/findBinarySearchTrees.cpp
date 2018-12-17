@@ -8,30 +8,33 @@
 #include <vector>
 
 using namespace std;
-
+/*
 int findBST(vector<int> & vv, int root, int remain)
 {
-	if(remain == 0)
+	if(remain == 1)
 		return 1;
-	int res = 0;
+	int left , right;
 	for(int i = 0; i <= root; i++)
 	{
+		left = right = 1;
 		for(int j = root + 1; j <vv.size(); j++)
 		{
-			if(i == root)
+			if(i != root && vv[i] == 1)
 			{
-				vv[i]
+				vv[i]--;
+				left = findBST(vv, i, remain-1);
+				vv[i]++;
 			}
-		}
-		if(vv[i] == 1)
-		{
-			vv[i]--;
-			res += findBST(vv, i, remain -1);
-			vv[i]++;
+			if(j != vv.size()-1 && vv[j] == 1)
+			{
+				vv[j]--;
+				right = findBST(vv, j, remain-1);
+				vv[j]++;
+			}
 		}
 	}
 	
-	return res;
+	return left * right;
 }
 
 int findBST(vector<int> & vc)
@@ -48,12 +51,30 @@ int findBST(vector<int> & vc)
 	}
 	return res;
 }
+*/
+
+int findBST(int n)
+{
+	if(n < 0)
+		return -1;
+	vector<int> vv(n+1, 0);
+	vv[0] = 1;
+	for(int i = 1; i < n+1; i++)
+	{
+		for(int j = 0; j < i; j++)
+		{
+			vv[i] += vv[j] * vv[i-1-j];
+		}
+	}
+	return vv[n];
+}
 
 int main()
 {
 	int n;
 	cin >> n;
-	vector<int> help(n, 1);
-	cout << findBST(help);
+	//vector<int> help(n, 1);
+	//cout << findBST(help);
+	cout << findBST(n) << endl;
 	return  0;
 }
